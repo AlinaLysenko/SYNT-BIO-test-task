@@ -42,14 +42,13 @@ public class GitHubPageTests {
     public void testSearchRepository() {
         GitHubSite.homePage.shouldBeOpened();
         GitHubSite.homePage.searchInput.is().visible();
-        GitHubSite.homePage.search("jdi");
-        GitHubSite.searchPage.checkOpened();
+        GitHubSite.homePage.search("jdi").checkOpened();
         GitHubSite.searchPage.searchResult.is().visible();
         GitHubSite.searchPage.searchResult.forEach(e -> assertTrue(e.getText().toLowerCase().contains("jdi")));
     }
 
     @Test
-    public void testDropdowns() {
+    public void testNavigationDropdownsAppears() {
         GitHubSite.homePage.shouldBeOpened();
         GitHubSite.homePage.headerItems.is().visible();
         GitHubSite.homePage.headerItems.get(1).click();

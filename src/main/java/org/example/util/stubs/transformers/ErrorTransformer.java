@@ -17,7 +17,7 @@ public class ErrorTransformer extends ResponseTransformer {
 
     public ErrorTransformer() {
         this.startTime = LocalTime.now();
-        this.duration = Duration.ofMinutes(2);
+        this.duration = Duration.ofMinutes(1);
     }
 
     @SneakyThrows

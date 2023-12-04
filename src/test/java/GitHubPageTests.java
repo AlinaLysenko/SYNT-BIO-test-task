@@ -1,8 +1,6 @@
-import com.epam.jdi.light.elements.complex.dropdown.Dropdown;
 import com.epam.jdi.light.elements.pageobjects.annotations.JSite;
 
 import org.testng.annotations.AfterClass;
-import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeMethod;
 import site.GitHubSite;
 import org.testng.annotations.Test;

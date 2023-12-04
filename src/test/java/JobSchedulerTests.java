@@ -79,9 +79,8 @@ public class JobSchedulerTests {
             return statusResponse.getJobStatus().equals(JobStatus.SUCCESS);
         }, 5, "Job did not complete successfully within the expected time");
 
-        Assert.assertFalse(stubs.wireMockServer
-                .findAll(getRequestedFor(urlEqualTo("/job/" + jobId)))
-                .isEmpty());
+        Assert.assertTrue(stubs.wireMockServer
+                .findAll(getRequestedFor(urlEqualTo("/job/" + jobId))).size() > 1);
     }
 
     @SneakyThrows
@@ -114,9 +113,9 @@ public class JobSchedulerTests {
                     .statusCode(200)
                     .extract()
                     .as(GetJobStatusResponse.class);
-
+            Assert.assertEquals(JobStatus.ERROR, statusResponse.getJobStatus(), "Status should be ERROR");
             return statusResponse.getJobStatus().equals(JobStatus.ERROR);
-        }, 5, "Job did not complete successfully within the expected time");
+        }, 5, "Job did not get error status for invalid entity.");
 
         stubs.wireMockServer.verify(1, getRequestedFor(urlEqualTo("/job/" + jobId)));
     }
@@ -156,11 +155,10 @@ public class JobSchedulerTests {
                             statusResponse.getJobStatus().equals(JobStatus.IN_PROGRESS),
                     "Status should be IN PROGRESS or ERROR");
             return statusResponse.getJobStatus().equals(JobStatus.ERROR);
-        }, 5, "Job did not complete successfully within the expected time");
+        }, 5, "Job did not get error status for entity with error");
 
-        Assert.assertFalse(stubs.wireMockServer.findAll(
-                getRequestedFor(urlEqualTo("/job/" + jobId)))
-                .isEmpty());
+        Assert.assertTrue(stubs.wireMockServer
+                .findAll(getRequestedFor(urlEqualTo("/job/" + jobId))).size() > 1);
 
     }
 

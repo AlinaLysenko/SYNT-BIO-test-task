@@ -10,6 +10,7 @@ import org.example.util.enums.JobStatus;
 
 import java.time.Duration;
 import java.time.LocalTime;
+import java.util.Random;
 
 public class ErrorTransformer extends ResponseTransformer {
     private final LocalTime startTime;
@@ -17,7 +18,7 @@ public class ErrorTransformer extends ResponseTransformer {
 
     public ErrorTransformer() {
         this.startTime = LocalTime.now();
-        this.duration = Duration.ofMinutes(1);
+        this.duration = Duration.ofSeconds(new Random().nextInt(100) + 10);
     }
 
     @SneakyThrows
